@@ -8,3 +8,5 @@ tramp
 .\#*
 *.o
 *.a
+libbttp.a
+tester
