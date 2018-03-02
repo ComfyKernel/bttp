@@ -32,7 +32,7 @@ const std::string& bttp::parameter::get(const std::string& name) {
 }
 
 const std::vector<std::string>& bttp::parameter::all() {
-  bttp::debug::callinfo(_BT_M_INFO_, "Test message");
+  // bttp::debug::callinfo(_BT_M_INFO_, "Test message");
   
   return __bt_prop_parameters;
 }
