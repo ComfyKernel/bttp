@@ -30,6 +30,12 @@ int main(int argc, char *argv[]) {
 	   <<"-"
 	   <<bttp::parameter::get("versionFlair")
 	   <<"\n";
+
+  std::cout<<"\nTesting bttp::parameter::get but with a fake key\n";
+
+  std::cout<<"Key : "
+	   <<bttp::parameter::get("obviouslyFake")
+	   <<"\n";
   
   return 0;
 }

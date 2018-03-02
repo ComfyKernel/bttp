@@ -19,14 +19,14 @@ const std::string __bt_prop_parameter_unknown = "[Unknown Parameter]";
 
 const std::string& bttp::parameter::get(const std::string& name) {
   for(unsigned int i=0; i<__bt_prop_parameters.size(); ++i) {
-    if(__bt_prop_parameters[i] == name) {
-      if(i%2 != 0) {
-	return __bt_prop_parameters[i - 1];
-      }
-      
+    if(__bt_prop_parameters[i] == name && i % 2 == 0) {      
       return __bt_prop_parameters[i + 1];
     }
   }
+
+  bttp::debug::callwarn(_BT_M_INFO_,
+			std::string("Could not find parameter '" +
+				    name + "'"));
 
   return __bt_prop_parameter_unknown;
 }
