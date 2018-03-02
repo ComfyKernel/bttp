@@ -6,10 +6,11 @@ ORIGIN  = $(shell readlink -f .)
 BUILD   = $(ORIGIN)/build
 INCLUDE = $(ORIGIN)/include
 SOURCE  = $(ORIGIN)/source
+TEST    = $(ORIGIN)/test
 
 # Choose the used libraries #
 # And set the compile flags #
-LIBS    = -lGL -lGLEW -lGLFW
+LIBS    = -lGL -lGLEW -lglfw
 
 CFLAGS  = -Wall -Wextra -g $(LIBS) -I $(INCLUDE)
 CCFLAGS = $(CFLAGS) -std=c++17
@@ -83,3 +84,19 @@ clean:
 
 	@echo -en "[\e[32mINFO\e[0m] Removing archive\n"
 	@rm -v $(BUILD)/$(O)
+
+# Testing Targets #
+
+test: $(BUILD)/tester PHONY
+
+runtest:
+	@cd $(BUILD); \
+	./tester;
+
+$(BUILD)/tester: $(TEST)/test.o PHONY
+	@echo -en "[\e[33mTEST\e[0m] Building Test\n"
+	@echo -en "[\e[36m"$(CN)"\e[0m]" $< "-o" $@ "\n"
+
+	@$(CP) $< -o $@ -L$(BUILD) -lbttp
+
+PHONY:
