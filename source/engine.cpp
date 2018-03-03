@@ -2,6 +2,16 @@
 
 #include <engine.hpp>
 
+bttp::_bt_log bttp::log = _bt_log();
+
+bool bttp::init() {
+  if(!logfile("bttp.log")) {
+    debug::callwarn(_BT_M_INFO_, "Failed to open logfile! Using STD::COUT only");
+  }
+
+  return true;
+}
+
 //           //
 // PARAMETER //
 //           //
@@ -59,3 +69,22 @@ __BT_M_DBG_CALL(bttp::debug::callerror, bttp::severity::dbg_sv_error      );
 __BT_M_DBG_CALL(bttp::debug::callcrit , bttp::severity::dbg_sv_critical   );
 
 #undef __BT_M_DBG_CALL
+
+//         //
+// LOGGING //
+//         //
+
+bool bttp::logfile(const std::string& name) {
+  if(log.file.is_open()) {
+    log.file.close();
+  }
+
+  log.file.open(name);
+
+  if(!log.file.is_open()) {
+    debug::callerror(_BT_M_INFO_, std::string("Failed opening logfile '") + name + "'");
+    return false;
+  }
+
+  return true;
+}
