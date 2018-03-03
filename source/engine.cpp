@@ -51,6 +51,17 @@ const std::vector<std::string>& bttp::parameter::all() {
 // DEBUG //
 //       //
 
+const std::vector<std::string> __bt_severities = {
+  "information",
+  "warning",
+  "error",
+  "critical"
+};
+
+const std::string& bttp::getseverity(bttp::severity sev) {
+  return __bt_severities[sev];
+}
+
 void (*__bt_debug_callback)(const bttp::severity, const std::string&, const std::string&) = nullptr;
 
 void bttp::debug::callback(void(*cb)(const bttp::severity, const std::string&, const std::string&)) {

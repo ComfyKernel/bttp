@@ -4,7 +4,9 @@
 
 void bttp_debug_callback(const bttp::severity severity,
 			 const std::string& info, const std::string& message) {
-  bttp::log<<"[BTTP] [Severity "<<severity<<"] "<<info<<"\n       "<<message<<"\n";
+  bttp::log<<"[BTTP] ["<<bttp::getseverity(severity)
+	   <<"] "<<info<<"\n       "
+	   <<message<<"\n";
 }
 
 int main(int argc, char *argv[]) {

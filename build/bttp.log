@@ -15,6 +15,6 @@ Using BTTP :
 Version : 0.1-Early
 
 Testing bttp::parameter::get but with a fake key
-Key : [BTTP] [Severity 1] [/home/comfy/projects/bttp/source/engine.cpp] get : line 37
+Key : [BTTP] [warning] [/home/comfy/projects/bttp/source/engine.cpp] get : line 37
        Could not find parameter 'obviouslyFake'
 [Unknown Parameter]

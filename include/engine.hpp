@@ -21,11 +21,13 @@ namespace bttp {
   };
 
   enum severity {
-    dbg_sv_information,
-    dbg_sv_warning,
-    dbg_sv_error,
-    dbg_sv_critical,
+    dbg_sv_information=0,
+    dbg_sv_warning    =1,
+    dbg_sv_error      =2,
+    dbg_sv_critical   =3,
   };
+
+  const std::string& getseverity(severity);
 
   class debug {
   public:
