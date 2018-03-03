@@ -36,6 +36,7 @@ ACTIVITY = 0 # Check if something changed
 
 # Get files #
 FILES = $(shell find $(SOURCE) -name *$(FT))
+OBJS  = $(patsubst %$(FT), %.o, $(FILES))
 
 all: info $(BUILD)/$(O) check
 	@[ $(ACTIVITY) -eq 0 ] && echo -en "[\e[34mBUILD\e[0m] Nothing to do\n" || echo -en ""
@@ -63,7 +64,7 @@ info:
 	@echo -en "[\e[36m"$(CN)"\e[0m] -c" $^ "-o" $@ "\n"
 	@$(CP) -c $^ -o $@
 
-$(BUILD)/$(O): $(patsubst %.cpp, %.o, $(FILES))
+$(BUILD)/$(O): $(OBJS)
 	$(eval ACTIVITY = 1)
 	@echo -en "\n[\e[31mAR\e[0m]" $(AFLAGS) $@ $^ "\n"
 
