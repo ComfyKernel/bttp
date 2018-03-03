@@ -1,16 +1,16 @@
 Test message
 Test message 2
 
-Using bttp::log for rest of tests
+Using bt::log for rest of tests
 
-Testing bttp::parameter::all
+Testing bt::parameter::all
 [all] Got Pair : versionMajor : 0
 [all] Got Pair : versionMinor : 1
 [all] Got Pair : versionFlair : Early
 [all] Got Pair : author : ComfyKernel
 [all] Got Pair : email : comfykernel@gmail.com
 
-Testing bttp::parameter::get
+Testing bt::parameter::get
 Using BTTP : 
 Version : 0.1-Early
 

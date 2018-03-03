@@ -11,7 +11,7 @@
 #include "types.hpp"
 #include "argparse.hpp"
 
-namespace bttp {
+namespace bt {
   bool init();
   
   class parameter {
@@ -51,7 +51,7 @@ namespace bttp {
 }
 
 template<typename T>
-bttp::_bt_log& operator<<(bttp::_bt_log& out, T in) {
+bt::_bt_log& operator<<(bt::_bt_log& out, T in) {
   if(out.file.is_open())
     out.file << in;
   

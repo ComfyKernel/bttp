@@ -2,53 +2,53 @@
 
 #include <engine.hpp>
 
-void bttp_debug_callback(const bttp::severity severity,
+void bttp_debug_callback(const bt::severity severity,
 			 const std::string& info, const std::string& message) {
-  bttp::log<<"[BTTP] ["<<bttp::getseverity(severity)
-	   <<"] "<<info<<"\n       "
-	   <<message<<"\n";
+  bt::log<<"[BTTP] ["<<bt::getseverity(severity)
+	 <<"] "<<info<<"\n       "
+	 <<message<<"\n";
 }
 
 int main(int argc, char *argv[]) {
-  std::cout<<"Setting bttp::debug's callback\n";
+  std::cout<<"Setting bt::debug's callback\n";
 
-  bttp::debug::callback(bttp_debug_callback);
+  bt::debug::callback(bttp_debug_callback);
 
-  std::cout<<"\nCalling bttp::init\n";
+  std::cout<<"\nCalling bt::init\n";
 
-  bttp::init();
+  bt::init();
 
-  std::cout<<"\nCalling bttp::log <<\n";
+  std::cout<<"\nCalling bt::log <<\n";
 
-  bttp::log<<"Test message\n";
-  bttp::log<<"Test message 2\n";
+  bt::log<<"Test message\n";
+  bt::log<<"Test message 2\n";
 
-  bttp::log<<"\nUsing bttp::log for rest of tests\n";
+  bt::log<<"\nUsing bt::log for rest of tests\n";
   
-  bttp::log<<"\nTesting bttp::parameter::all\n";
+  bt::log<<"\nTesting bt::parameter::all\n";
 
-  auto _pvec = bttp::parameter::all();
+  auto _pvec = bt::parameter::all();
 
   for(unsigned int i=0; i<_pvec.size(); i+=2) {
-    bttp::log<<"[all] Got Pair : "<<_pvec[i]<<" : "<<_pvec[i + 1]<<"\n";
+    bt::log<<"[all] Got Pair : "<<_pvec[i]<<" : "<<_pvec[i + 1]<<"\n";
   }
   
-  bttp::log<<"\nTesting bttp::parameter::get\n";
+  bt::log<<"\nTesting bt::parameter::get\n";
   
-  bttp::log<<"Using BTTP : \n"
-	   <<"Version : "
-	   <<bttp::parameter::get("versionMajor")
-	   <<"."
-	   <<bttp::parameter::get("versionMinor")
-	   <<"-"
-	   <<bttp::parameter::get("versionFlair")
-	   <<"\n";
+  bt::log<<"Using BTTP : \n"
+	 <<"Version : "
+	 <<bt::parameter::get("versionMajor")
+	 <<"."
+	 <<bt::parameter::get("versionMinor")
+	 <<"-"
+	 <<bt::parameter::get("versionFlair")
+	 <<"\n";
 
-  bttp::log<<"\nTesting bttp::parameter::get but with a fake key\n";
+  bt::log<<"\nTesting bttp::parameter::get but with a fake key\n";
 
-  bttp::log<<"Key : "
-	   <<bttp::parameter::get("obviouslyFake")
-	   <<"\n";
+  bt::log<<"Key : "
+	 <<bt::parameter::get("obviouslyFake")
+	 <<"\n";
   
   return 0;
 }

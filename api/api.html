@@ -22,47 +22,47 @@
 	</thead>
 	<tbody>
 	  <tr>
-	    <td align="left" class="br">bttp::init()</td>
+	    <td align="left" class="br">bt::init()</td>
 	    <td align="left" class="br">Initializes basic BTTP classes</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::parameter</td>
+	    <td align="left" class="br">bt::parameter</td>
 	    <td align="left" class="br">Container class for parameter functions</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::parameter::get(const std::string&)</td>
+	    <td align="left" class="br">bt::parameter::get(const std::string&)</td>
 	    <td align="left" class="br">Grabs a parameter from the pre compiled list</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::parameter::all()</td>
+	    <td align="left" class="br">bt::parameter::all()</td>
 	    <td align="left" class="br">Returns the entire list of parameters</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::severity</td>
+	    <td align="left" class="br">bt::severity</td>
 	    <td align="left" class="br">Enum for debug severity hints</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::getseverity(bttp::severity)</td>
+	    <td align="left" class="br">bt::getseverity(bt::severity)</td>
 	    <td align="left" class="br">Returns string related to severity</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::debug</td>
+	    <td align="left" class="br">bt::debug</td>
 	    <td align="left" class="br">Container class for debug functions</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::debug::callback(void(*)(const bttp::severity, const std::string&, const std::string&))</td>
+	    <td align="left" class="br">bt::debug::callback(void(*)(const bt::severity, const std::string&, const std::string&))</td>
 	    <td align="left" class="br">Set callback for debugging functions</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::debug::callinfo/callwarn/callerror/callcrit/(const std::string&, const std::string&)</td>
+	    <td align="left" class="br">bt::debug::callinfo/callwarn/callerror/callcrit/(const std::string&, const std::string&)</td>
 	    <td align="left" class="br">Calls the set debug callback with one of the severities</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::logfile(const std::string&)</td>
+	    <td align="left" class="br">bt::logfile(const std::string&)</td>
 	    <td align="left" class="br">Set log file</td>
 	  </tr>
 	  <tr>
-	    <td align="left" class="br">bttp::log</td>
+	    <td align="left" class="br">bt::log</td>
 	    <td align="left" class="br">Log used for writing to the file and printing to the screen</td>
 	  </tr>
 	</tbody>
