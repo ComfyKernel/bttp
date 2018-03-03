@@ -18,3 +18,27 @@ Testing bttp::parameter::get but with a fake key
 Key : [BTTP] [warning] [/home/comfy/projects/bttp/source/engine.cpp] get : line 37
        Could not find parameter 'obviouslyFake'
 [Unknown Parameter]
+
+Testing type2d<int>
+Result after creation       : (10,20)
+Using operand (10, 5)
+Result after addition       : (20,25)
+Result after subtraction    : (0,15)
+Result after multiplication : (100,100)
+Result after division       : (1,4)
+Result after modulo         : (0,0)
+
+Testing type2d<float>
+Result after creation       : (10,20)
+Using operand (10, 5)
+Result after addition       : (20,25)
+Result after subtraction    : (0,15)
+Result after multiplication : (100,100)
+Result after division       : (1,4)
+
+Testing type2d<int> mixed with type2d<float>
+Using operand (10, 5) as float
+Result after addition       : (20,25)
+Result after subtraction    : (0,15)
+Result after multiplication : (100,100)
+Result after division       : (1,4)

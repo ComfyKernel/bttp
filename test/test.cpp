@@ -49,6 +49,40 @@ int main(int argc, char *argv[]) {
   bt::log<<"Key : "
 	 <<bt::parameter::get("obviouslyFake")
 	 <<"\n";
+
+  bt::log<<"\nTesting type2d<int>\n";
+
+  type2d<int> test(10, 20);
+
+  bt::log<<"Result after creation       : "<<test<<"\n";
+  bt::log<<"Using operand (10, 5)\n";
+
+  bt::log<<"Result after addition       : "<<(test + type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after subtraction    : "<<(test - type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after multiplication : "<<(test * type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after division       : "<<(test / type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after modulo         : "<<(test % type2d<int>(10, 5))<<"\n";
+
+  bt::log<<"\nTesting type2d<float>\n";
+
+  type2d<float> test2(10, 20);
+
+  bt::log<<"Result after creation       : "<<test<<"\n";
+  bt::log<<"Using operand (10, 5)\n";
+
+  bt::log<<"Result after addition       : "<<(test2 + type2d<float>(10, 5))<<"\n";
+  bt::log<<"Result after subtraction    : "<<(test2 - type2d<float>(10, 5))<<"\n";
+  bt::log<<"Result after multiplication : "<<(test2 * type2d<float>(10, 5))<<"\n";
+  bt::log<<"Result after division       : "<<(test2 / type2d<float>(10, 5))<<"\n";
+
+  bt::log<<"\nTesting type2d<int> mixed with type2d<float>\n";
+
+  bt::log<<"Using operand (10, 5) as float\n";
+
+  bt::log<<"Result after addition       : "<<(test + type2d<float>(10, 5))<<"\n";
+  bt::log<<"Result after subtraction    : "<<(test - type2d<float>(10, 5))<<"\n";
+  bt::log<<"Result after multiplication : "<<(test * type2d<float>(10, 5))<<"\n";
+  bt::log<<"Result after division       : "<<(test / type2d<float>(10, 5))<<"\n";
   
   return 0;
 }

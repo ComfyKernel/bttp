@@ -9,6 +9,8 @@
 #include <iostream>
 
 #include "types.hpp"
+#include "type2d.hpp"
+#include "type3d.hpp"
 #include "argparse.hpp"
 
 namespace bt {
