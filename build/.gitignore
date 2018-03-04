@@ -10,3 +10,4 @@ tramp
 *.a
 libbttp.a
 tester
+*.log
