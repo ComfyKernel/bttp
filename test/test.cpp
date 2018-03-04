@@ -76,13 +76,54 @@ int main(int argc, char *argv[]) {
   bt::log<<"Result after division       : "<<(test2 / type2d<float>(10, 5))<<"\n";
 
   bt::log<<"\nTesting type2d<int> mixed with type2d<float>\n";
-
   bt::log<<"Using operand (10, 5) as float\n";
 
   bt::log<<"Result after addition       : "<<(test + type2d<float>(10, 5))<<"\n";
   bt::log<<"Result after subtraction    : "<<(test - type2d<float>(10, 5))<<"\n";
   bt::log<<"Result after multiplication : "<<(test * type2d<float>(10, 5))<<"\n";
   bt::log<<"Result after division       : "<<(test / type2d<float>(10, 5))<<"\n";
+
+  bt::log<<"\nTesting operator assignment to type2d<int>\n";
+  bt::log<<"Using operand (10, 5)\n";
+  
+  bt::log<<"Result after addition assignment       : "<<(test += type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after subtraction assignment    : "<<(test -= type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after multiplication assignment : "<<(test *= type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after division assignment       : "<<(test /= type2d<int>(10, 5))<<"\n";
+  bt::log<<"Result after modulo assignment         : "<<(test %= type2d<int>(10, 5))<<"\n";
+
+  bt::log<<"\nNot testing type2d<float>, Assumed to work\n";
+
+  bt::log<<"\nTesting real assignment to type2d<int>\n";
+  bt::log<<"Using operand (10, 5)\n";
+
+  bt::log<<"Result after assignment : "<<(test = type2d<int>(10, 5))<<"\n";
+
+  bt::log<<"Using operand (10, 20) as float\n";
+
+  bt::log<<"Result after assignment : "<<(test = type2d<float>(10, 20))<<"\n";
+
+  bt::log<<"\nTesting type2d<int> with single\n";
+  bt::log<<"Using operand (10)\n";
+
+  bt::log<<"Result after addition       : "<<(test + 10)<<"\n";
+  bt::log<<"Result after subtraction    : "<<(test - 10)<<"\n";
+  bt::log<<"Result after multiplication : "<<(test * 10)<<"\n";
+  bt::log<<"Result after division       : "<<(test / 10)<<"\n";
+  bt::log<<"Result after modulo         : "<<(test % 10)<<"\n";
+
+  bt::log<<"\nNot cross testing types, assumed to work\n";
+
+  bt::log<<"\nTesting type2d<int> assigning with single\n";
+  bt::log<<"Using operand (10)\n";
+
+  bt::log<<"Result after addition assignment       : "<<(test += 10)<<"\n";
+  bt::log<<"Result after subtraction assignment    : "<<(test -= 10)<<"\n";
+  bt::log<<"Result after multiplication assignment : "<<(test *= 10)<<"\n";
+  bt::log<<"Result after division assignment       : "<<(test /= 10)<<"\n";
+  bt::log<<"Result after modulo assignment         : "<<(test %= 10)<<"\n";
+
+  bt::log<<"\nNot cross testing types, assumed to work\n";
   
   return 0;
 }

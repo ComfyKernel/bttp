@@ -42,3 +42,39 @@ Result after addition       : (20,25)
 Result after subtraction    : (0,15)
 Result after multiplication : (100,100)
 Result after division       : (1,4)
+
+Testing operator assignment to type2d<int>
+Using operand (10, 5)
+Result after addition assignment       : (20,25)
+Result after subtraction assignment    : (10,20)
+Result after multiplication assignment : (100,100)
+Result after division assignment       : (10,20)
+Result after modulo assignment         : (0,0)
+
+Not testing type2d<float>, Assumed to work
+
+Testing real assignment to type2d<int>
+Using operand (10, 5)
+Result after assignment : (10,5)
+Using operand (10, 20) as float
+Result after assignment : (10,20)
+
+Testing type2d<int> with single
+Using operand (10)
+Result after addition       : (20,30)
+Result after subtraction    : (0,10)
+Result after multiplication : (100,200)
+Result after division       : (1,2)
+Result after modulo         : (0,0)
+
+Not cross testing types, assumed to work
+
+Testing type2d<int> assigning with single
+Using operand (10)
+Result after addition assignment       : (20,30)
+Result after subtraction assignment    : (10,20)
+Result after multiplication assignment : (100,200)
+Result after division assignment       : (10,20)
+Result after modulo assignment         : (0,0)
+
+Not cross testing types, assumed to work
