@@ -13,7 +13,7 @@ public:
     : a(A), b(B) { }
 
   template<typename T2>
-  type2d(const T& t)
+  type2d(const T2& t)
     : a(t.a), b(t.b) { }
 
   template<typename T2>
@@ -95,4 +95,5 @@ std::ostream& operator<<(std::ostream& o, const type2d<T>& t) {
   o<<"("<<t.a<<","<<t.b<<")";
   return o;
 }
+
 #endif
