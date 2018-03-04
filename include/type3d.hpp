@@ -1,6 +1,8 @@
 #ifndef BTTP_TYPE3D_HPP
 #define BTTP_TYPE3D_HPP
 
+#include <ostream>
+
 #include "type2d.hpp"
 
 template<typename T>
@@ -104,5 +106,25 @@ std::ostream& operator<<(std::ostream& o, const type3d<T>& t) {
   o<<"("<<t.a<<","<<t.b<<","<<t.c<<")";
   return o;
 }
+
+using uint32_3d = type3d<uint32>;
+using uint16_3d = type3d<uint16>;
+using byte3d    = type3d<byte>;
+
+using int32_3d  = type3d<int32>;
+using int16_3d  = type3d<int16>;
+using sbyte3d   = type3d<sbyte>;
+
+using int3d     = type3d<int>;
+using uint3d    = type3d<unsigned int>;
+
+using short3d   = type3d<short>;
+using ushort3d  = type3d<unsigned short>;
+
+using long3d    = type3d<long>;
+using ulong3d   = type3d<unsigned long>;
+
+using float3d   = type3d<float>;
+using double3d  = type3d<double>;
 
 #endif

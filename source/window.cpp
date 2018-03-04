@@ -1,0 +1,96 @@
+#include <SDL2/SDL.h>
+
+#include <window.hpp>
+#include <engine.hpp>
+
+bool _bt_window_sdl_active = false;
+
+class bt::window::_window_impl_ {
+public:
+  SDL_Window*   window;
+  SDL_GLContext ctx;
+  SDL_Event*    event;
+  bool          open;
+
+  std::string name;
+  version     gl_version;
+
+  bool w_open(const size& siz, const std::string& nm, const version& glv) {
+    if(!_bt_window_sdl_active) {
+      if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0) {
+	bt::debug::callerror(_BT_M_INFO_, "Failed to initialize SDL2!");
+	bt::log<<"Reason : "<<SDL_GetError()<<"\n";
+
+	_bt_window_sdl_active = false;
+	return false;
+      }
+      
+      _bt_window_sdl_active = true;
+    }
+
+    name       = nm;
+    gl_version = glv;
+    
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, glv.a);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, glv.b);
+    
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+    if(glv.a >= 3 && glv.b >= 2) {
+      SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK,
+			  SDL_GL_CONTEXT_PROFILE_CORE);
+    }
+
+    window = SDL_CreateWindow(nm.c_str(),
+			      SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+			      siz.a, siz.b,
+			      SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+
+    if(!window) {
+      bt::debug::callerror(_BT_M_INFO_, "Failed to create an SDL2 Window");
+      bt::log<<"Reason : "<<SDL_GetError()<<"\n";
+      
+      return false;
+    }
+    
+    ctx = SDL_GL_CreateContext(window);
+    SDL_GL_MakeCurrent(window, ctx);
+
+    open = true;
+    
+    return true;
+  }
+
+  void close() {
+    bt::debug::callinfo(_BT_M_INFO_, std::string("Closing window : '")+name+"'");
+    
+    SDL_GL_DeleteContext(ctx);
+    SDL_DestroyWindow(window);
+
+    open = false;
+  }
+};
+
+bt::window::window()
+  : _impl{new _window_impl_()} { }
+
+bt::window::window(const size& siz, const std::string& nam, const version& glv)
+  : _impl{new _window_impl_()} {
+  open(siz, nam, glv);
+}
+
+bool bt::window::open(const size& siz, const std::string& nam, const version& glv) {
+  return _impl->w_open(siz, nam, glv);
+}
+
+void bt::window::close() {
+  if(_impl->open)
+    _impl->close();
+}
+
+bt::window::~window() {
+  if(_impl->open)
+    _impl->close();
+  
+  delete _impl;
+}

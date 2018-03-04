@@ -1,6 +1,8 @@
 #ifndef BTTP_TYPE2D_HPP
 #define BTTP_TYPE2D_HPP
 
+#include <ostream>
+
 #include "types.hpp"
 
 template<typename T>
@@ -95,5 +97,27 @@ std::ostream& operator<<(std::ostream& o, const type2d<T>& t) {
   o<<"("<<t.a<<","<<t.b<<")";
   return o;
 }
+
+using uint32_2d = type2d<uint32>;
+using uint16_2d = type2d<uint16>;
+using byte2d    = type2d<byte>;
+
+using int32_2d  = type2d<int32>;
+using int16_2d  = type2d<int16>;
+using sbyte2d   = type2d<sbyte>;
+
+using int2d     = type2d<int>;
+using uint2d    = type2d<unsigned int>;
+
+using short2d   = type2d<short>;
+using ushort2d  = type2d<unsigned short>;
+
+using long2d    = type2d<long>;
+using ulong2d   = type2d<unsigned long>;
+
+using float2d   = type2d<float>;
+using double2d  = type2d<double>;
+
+using size = uint32_2d;
 
 #endif

@@ -10,7 +10,7 @@ TEST    = $(ORIGIN)/test
 
 # Choose the used libraries #
 # And set the compile flags #
-LIBS    = -lGL -lGLEW -lglfw
+LIBS    = -lGL -lGLEW -lSDL2
 
 CFLAGS  = -Wall -Wextra -g $(LIBS) -I $(INCLUDE)
 CCFLAGS = $(CFLAGS) -std=c++17

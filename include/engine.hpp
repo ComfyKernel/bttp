@@ -12,6 +12,7 @@
 #include "type2d.hpp"
 #include "type3d.hpp"
 #include "argparse.hpp"
+#include "window.hpp"
 
 namespace bt {
   bool init();

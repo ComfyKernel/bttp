@@ -55,6 +55,16 @@ int main(int argc, char *argv[]) {
 
   test_type2d();
   test_type3d();
+
+  bt::log<<"\nTesting window creation / Deletion\n";
+
+  bt::log<<"Creating a window\n";
+
+  bt::window win(size(1280, 720), "Test Window", bt::version(3, 2));
+
+  bt::log<<"Closing a window\n";
+
+  win.close();
   
   return 0;
 }
@@ -213,6 +223,6 @@ bool test_type3d() {
   bt::log<<"Result after modulo assignment         : "<<(test %= 10)<<"\n";
 
   bt::log<<"\nNot cross testing types, assumed to work\n";
-
+  
   return true;
 }
