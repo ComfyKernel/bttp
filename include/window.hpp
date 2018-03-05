@@ -20,6 +20,11 @@ namespace bt {
     bool open(const size&, const std::string&, const version&);
     void close();
 
+    bool is_open();
+    bool should_close();
+
+    void poll();
+
     void swap();
     
     ~window();

@@ -2,6 +2,8 @@
 
 #include <engine.hpp>
 
+#include <GL/glew.h>
+
 bool test_type2d();
 bool test_type3d();
 
@@ -65,6 +67,33 @@ int main(int argc, char *argv[]) {
   bt::log<<"Closing a window\n";
 
   win.close();
+
+  bt::log<<"\nTesting graphics, keeping a window open for 100 frames\n";
+
+  bt::window wind(size(1280, 720), "Testing Window", bt::version(3, 2));
+
+  if(glewInit() != GLEW_OK) {
+    bt::log<<"Failed to initialize GLEW! Cannot finish tests, exiting.\n";
+    return 1;
+  }
+  
+  uint32 frames = 0;
+
+  glClearColor(0, 0, 0, 1);
+  
+  while(frames < 100) {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    wind.poll();
+    
+    wind.swap();
+    
+    frames += 1;
+  }
+  
+  bt::log<<"Closing the window\n";
+
+  wind.close();
   
   return 0;
 }

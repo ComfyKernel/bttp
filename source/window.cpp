@@ -9,11 +9,24 @@ class bt::window::_window_impl_ {
 public:
   SDL_Window*   window;
   SDL_GLContext ctx;
-  SDL_Event*    event;
+  SDL_Event     event;
   bool          open;
+  bool   shouldClose;
 
   std::string name;
   version     gl_version;
+
+  void poll() {
+    while(SDL_PollEvent(&event)) {
+      if(event.type == SDL_QUIT) {
+	shouldClose = true;
+      }
+    }
+  }
+
+  void swap() {
+    SDL_GL_SwapWindow(window);
+  }
 
   bool w_open(const size& siz, const std::string& nm, const version& glv) {
     if(!_bt_window_sdl_active) {
@@ -93,4 +106,20 @@ bt::window::~window() {
     _impl->close();
   
   delete _impl;
+}
+
+void bt::window::swap() {
+  _impl->swap();
+}
+
+bool bt::window::is_open() {
+  return _impl->open;
+}
+
+bool bt::window::should_close() {
+  return _impl->shouldClose;
+}
+
+void bt::window::poll() {
+  _impl->poll();
 }
