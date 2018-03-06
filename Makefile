@@ -88,11 +88,14 @@ clean:
 
 # Testing Targets #
 
-test: $(BUILD)/tester PHONY
+test: cleantest $(BUILD)/tester PHONY
 
 runtest:
 	@cd $(BUILD); \
 	./tester;
+
+cleantest:
+	@[ -f $(TEST)/test.o ] && rm $(TEST)/test.o || echo -en ""
 
 $(BUILD)/tester: $(TEST)/test.o PHONY
 	@echo -en "[\e[33;1mTEST\e[0m] Building Test\n"

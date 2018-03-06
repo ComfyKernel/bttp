@@ -75,6 +75,15 @@ int main(int argc, char *argv[]) {
   uint32 frames = 0;
 
   glClearColor(0, 0, 0, 1);
+
+  bt::log<<"\nTesting buffer creation & binding\n";
+
+  bt::gl::buffer<float> vertices({-1.f, -1.f,
+	                           1.f, -1.f,
+     	                           0.f,  1.f},
+                                 GL_ARRAY_BUFFER, GL_STATIC_DRAW);
+
+  bt::log<<"Finished creating buffers\n";
   
   while(frames < 100) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

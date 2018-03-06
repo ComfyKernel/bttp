@@ -10,17 +10,21 @@ void bt_glCallback(GLenum source, GLenum type, GLuint id,
 		   GLenum severity, GLsizei length,
 		   const GLchar* message, const void* parameters) {
   _BT_M_UNUSED_(parameters);
-
-#define _BT_GL_MESSAGE_ std::string("[OPENGL] ") + (const char*)glGetString(type) + " " + (const char*)glGetString(source) + " ID : [" + std::to_string(id) + "] " + (const char*)message + "\n"
+  _BT_M_UNUSED_(length);
+  
+#define _BT_GL_MESSAGE_ std::string("[OPENGL] ") + " ID : [" + std::to_string(id) + "] " + (const char*)message + "\n"
 
   switch(severity) {
-  case GL_DEBUG_SEVERITY_LOW_ARB:
+  case GL_DEBUG_SEVERITY_NOTIFICATION:
     bt::debug::callinfo (_BT_M_INFO_, _BT_GL_MESSAGE_);
     break;
-  case GL_DEBUG_SEVERITY_MEDIUM_ARB:
+  case GL_DEBUG_SEVERITY_LOW:
     bt::debug::callwarn (_BT_M_INFO_, _BT_GL_MESSAGE_);
     break;
-  case GL_DEBUG_SEVERITY_HIGH_ARB:
+  case GL_DEBUG_SEVERITY_MEDIUM:
+    bt::debug::callwarn (_BT_M_INFO_, _BT_GL_MESSAGE_);
+    break;
+  case GL_DEBUG_SEVERITY_HIGH:
     bt::debug::callerror(_BT_M_INFO_, _BT_GL_MESSAGE_);
     break;
   }
@@ -111,9 +115,9 @@ public:
     if(glewIsSupported("GL_ARB_debug_output")) {
       bt::debug::callinfo(_BT_M_INFO_, "OpenGL Debug Output is supported");
 
-      glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
+      glEnable(GL_DEBUG_OUTPUT);
       
-      glDebugMessageCallbackARB(bt_glCallback, nullptr);
+      glDebugMessageCallback(bt_glCallback, nullptr);
     } else {
       bt::debug::callwarn(_BT_M_INFO_, "OpenGL Debug Output is not supported! Consider updating your drivers.");
     }

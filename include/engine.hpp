@@ -15,6 +15,9 @@
 #include "argparse.hpp"
 #include "window.hpp"
 
+#include "gl/head.hpp"
+#include "gl/buffer.hpp"
+
 namespace bt {
   bool init();
   
