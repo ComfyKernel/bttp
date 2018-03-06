@@ -71,11 +71,6 @@ int main(int argc, char *argv[]) {
   bt::log<<"\nTesting graphics, keeping a window open for 100 frames\n";
 
   bt::window wind(size(1280, 720), "Testing Window", bt::version(3, 2));
-
-  if(glewInit() != GLEW_OK) {
-    bt::log<<"Failed to initialize GLEW! Cannot finish tests, exiting.\n";
-    return 1;
-  }
   
   uint32 frames = 0;
 

@@ -2,6 +2,7 @@
 #define BTTP_ENGINE_MAIN_HPP
 
 #define _BT_M_INFO_ std::string("[") + __FILE__ + "] " + __func__ + " : line " + std::to_string(__LINE__)
+#define _BT_M_UNUSED_(var) do { (void)(var); } while (0)
 
 #include <string>
 #include <vector>

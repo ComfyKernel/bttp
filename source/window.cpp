@@ -1,9 +1,32 @@
 #include <SDL2/SDL.h>
+#include <GL/glew.h>
 
 #include <window.hpp>
 #include <engine.hpp>
 
 bool _bt_window_sdl_active = false;
+
+void bt_glCallback(GLenum source, GLenum type, GLuint id,
+		   GLenum severity, GLsizei length,
+		   const GLchar* message, const void* parameters) {
+  _BT_M_UNUSED_(parameters);
+
+#define _BT_GL_MESSAGE_ std::string("[OPENGL] ") + (const char*)glGetString(type) + " " + (const char*)glGetString(source) + " ID : [" + std::to_string(id) + "] " + (const char*)message + "\n"
+
+  switch(severity) {
+  case GL_DEBUG_SEVERITY_LOW_ARB:
+    bt::debug::callinfo (_BT_M_INFO_, _BT_GL_MESSAGE_);
+    break;
+  case GL_DEBUG_SEVERITY_MEDIUM_ARB:
+    bt::debug::callwarn (_BT_M_INFO_, _BT_GL_MESSAGE_);
+    break;
+  case GL_DEBUG_SEVERITY_HIGH_ARB:
+    bt::debug::callerror(_BT_M_INFO_, _BT_GL_MESSAGE_);
+    break;
+  }
+
+#undef _BT_GL_MESSAGE_
+}
 
 class bt::window::_window_impl_ {
 public:
@@ -69,6 +92,32 @@ public:
     ctx = SDL_GL_CreateContext(window);
     SDL_GL_MakeCurrent(window, ctx);
 
+    glewExperimental = GL_TRUE;
+    
+    GLenum g_stat = glewInit();
+    if(g_stat != GLEW_OK) {
+      bt::debug::callerror(_BT_M_INFO_, "Failed to initialize GLEW!");
+      bt::log<<"Reason : "<<glewGetString(g_stat)<<"\n";
+
+      SDL_GL_DeleteContext(ctx);
+      SDL_DestroyWindow(window);
+      
+      return false;
+    }
+
+    bt::debug::callinfo(_BT_M_INFO_, std::string("Using GLEW V.")
+			           + std::string((const char*)glewGetString(GLEW_VERSION)));
+
+    if(glewIsSupported("GL_ARB_debug_output")) {
+      bt::debug::callinfo(_BT_M_INFO_, "OpenGL Debug Output is supported");
+
+      glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
+      
+      glDebugMessageCallbackARB(bt_glCallback, nullptr);
+    } else {
+      bt::debug::callwarn(_BT_M_INFO_, "OpenGL Debug Output is not supported! Consider updating your drivers.");
+    }
+    
     open = true;
     
     return true;
