@@ -83,11 +83,32 @@ int main(int argc, char *argv[]) {
      	                           0.f,  1.f},
                                  GL_ARRAY_BUFFER, GL_STATIC_DRAW);
 
+  bt::gl::buffer<uint> indices({0, 1, 2},
+			       GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW);
+  
   bt::log<<"Finished creating buffers\n";
+  bt::log<<"\nCreating shaders\n";
+
+  bt::gl::shader vshad("test_vert.glsl", GL_VERTEX_SHADER);
+  bt::gl::shader fshad("test_frag.glsl", GL_FRAGMENT_SHADER);
+
+  bt::log<<"Finished creating shaders\n";
+  bt::log<<"\nCreating shader program\n";
+
+  bt::gl::program testprog({vshad, fshad});
+
+  bt::log<<"Finished creating the program\n";  
+  bt::log<<"\nStarting loop\n";
+
+  testprog.use();
   
   while(frames < 100) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    vertices.bind();
+
+    indices.bind();
+    
     wind.poll();
     
     wind.swap();

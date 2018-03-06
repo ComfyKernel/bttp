@@ -5,15 +5,14 @@
 #include "../types.hpp"
 
 #include <initializer_list>
-#include <iostream>
 
 namespace bt {
   namespace gl {
     template<typename T>
     class buffer : public head {
     protected:
-      GLenum _type;
-      GLenum _usage;
+      GLenum _type = GL_NONE;
+      GLenum _usage = GL_NONE;
       
     public:
       GLenum type () {
@@ -61,6 +60,19 @@ namespace bt {
 	if(!_name) return;
 
 	glDeleteBuffers(1, &_name);
+	_name = 0;
+
+	_type  = GL_NONE;
+	_usage = GL_NONE;
+      }
+
+      void bind() {
+	if(!_name) {
+	  bt::debug::callwarn(_BT_M_INFO_, "Cannot bind an un-initialized buffer!");
+	  return;
+	}
+
+	glBindBuffer(_type, _name);
       }
     };
   }

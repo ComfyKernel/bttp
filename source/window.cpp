@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 
 #include <window.hpp>
-#include <engine.hpp>
+#include <log.hpp>
 
 bool _bt_window_sdl_active = false;
 
