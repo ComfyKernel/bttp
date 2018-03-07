@@ -76,6 +76,14 @@ int main(int argc, char *argv[]) {
 
   glClearColor(0, 0, 0, 1);
 
+  bt::log<<"\nCreating a Vertex Array Object\n";
+
+  bt::gl::vao nvao;
+  nvao.create();
+  nvao.bind();
+
+  bt::log<<"Finished creating the Vertex Array Object\n";
+
   bt::log<<"\nTesting buffer creation & binding\n";
 
   bt::gl::buffer<float> vertices({-1.f, -1.f,
@@ -101,13 +109,17 @@ int main(int argc, char *argv[]) {
   bt::log<<"\nStarting loop\n";
 
   testprog.use();
+
+  glEnableVertexAttribArray(0);
   
   while(frames < 100) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     vertices.bind();
+    glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, (void*)0);
 
     indices.bind();
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)0);
     
     wind.poll();
     

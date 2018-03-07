@@ -14,6 +14,7 @@
 #include "gl/buffer.hpp"
 #include "gl/shader.hpp"
 #include "gl/program.hpp"
+#include "gl/vao.hpp"
 
 namespace bt {
   bool init();
