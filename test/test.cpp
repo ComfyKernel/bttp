@@ -68,7 +68,7 @@ int main(int argc, char *argv[]) {
 
   win.close();
 
-  bt::log<<"\nTesting graphics, keeping a window open for 100 frames\n";
+  bt::log<<"\nTesting graphics, running triangle testing for 30 frames\n";
 
   bt::window wind(size(1280, 720), "Testing Window", bt::version(3, 2));
   
@@ -139,7 +139,7 @@ int main(int argc, char *argv[]) {
 
   glEnableVertexAttribArray(0);
   
-  while(frames < 100) {
+  while(frames < 30) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     tvao.bind();
