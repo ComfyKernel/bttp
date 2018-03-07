@@ -9,5 +9,5 @@ tramp
 *.o
 *.a
 libbttp.a
-tester
+bttester
 *.log
