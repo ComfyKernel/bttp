@@ -9,6 +9,7 @@
 #include "type3d.hpp"
 #include "argparse.hpp"
 #include "window.hpp"
+#include "formatreader.hpp"
 
 #include "gl/head.hpp"
 #include "gl/buffer.hpp"
