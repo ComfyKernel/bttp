@@ -76,12 +76,6 @@ int main(int argc, char *argv[]) {
 
   glClearColor(0, 0, 0, 1);
 
-  bt::log<<"\nCreating a Vertex Array Object\n";
-
-  bt::gl::vao nvao;
-  nvao.create();
-  nvao.bind();
-
   bt::log<<"Finished creating the Vertex Array Object\n";
 
   bt::log<<"\nTesting buffer creation & binding\n";
@@ -89,12 +83,32 @@ int main(int argc, char *argv[]) {
   bt::gl::buffer<float> vertices({-1.f, -1.f,
 	                           1.f, -1.f,
      	                           0.f,  1.f},
-                                 GL_ARRAY_BUFFER, GL_STATIC_DRAW);
+    GL_ARRAY_BUFFER, GL_STATIC_DRAW);
 
   bt::gl::buffer<uint> indices({0, 1, 2},
 			       GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW);
   
   bt::log<<"Finished creating buffers\n";
+
+  bt::log<<"\nCreating a Vertex Array Object\n";
+
+  bt::gl::vao dvao;
+  dvao.create();
+  dvao.bind();
+  
+  bt::gl::vao tvao;
+  tvao.create();
+  tvao.bind();
+
+  vertices.bind();
+  glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, (void*)0);
+
+  indices.bind();
+
+  glEnableVertexAttribArray(0);
+
+  dvao.bind();
+  
   bt::log<<"\nCreating shaders\n";
 
   bt::gl::shader vshad("test_vert.glsl", GL_VERTEX_SHADER);
@@ -115,11 +129,11 @@ int main(int argc, char *argv[]) {
   while(frames < 100) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    vertices.bind();
-    glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, (void*)0);
+    tvao.bind();
 
-    indices.bind();
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)0);
+
+    dvao.bind();
     
     wind.poll();
     
