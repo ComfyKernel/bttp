@@ -80,13 +80,19 @@ int main(int argc, char *argv[]) {
 
   bt::log<<"\nTesting buffer creation & binding\n";
 
-  bt::gl::buffer<float> vertices({-1.f, -1.f,
-	                           1.f, -1.f,
-     	                           0.f,  1.f},
+  bt::gl::buffer<float> vertices({-1.f , -1.f,
+	                           0.f , -1.f,
+     	                          -0.5f,  0.f},
     GL_ARRAY_BUFFER, GL_STATIC_DRAW);
 
   bt::gl::buffer<uint> indices({0, 1, 2},
 			       GL_ELEMENT_ARRAY_BUFFER, GL_STATIC_DRAW);
+
+  bt::gl::buffer<float> vertices2({
+        0.f, 0.f,
+	1.f, 0.f,
+	0.5f, 1.f},
+    GL_ARRAY_BUFFER, GL_STATIC_DRAW);
   
   bt::log<<"Finished creating buffers\n";
 
@@ -95,17 +101,24 @@ int main(int argc, char *argv[]) {
   bt::gl::vao dvao;
   dvao.create();
   dvao.bind();
+
+  glEnableVertexAttribArray(0);
+
+  vertices2.bind();
+  glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, (void*)0);
+
+  indices.bind();
   
   bt::gl::vao tvao;
   tvao.create();
   tvao.bind();
 
+  glEnableVertexAttribArray(0);
+
   vertices.bind();
   glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, (void*)0);
 
   indices.bind();
-
-  glEnableVertexAttribArray(0);
 
   dvao.bind();
   
@@ -134,6 +147,8 @@ int main(int argc, char *argv[]) {
     glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)0);
 
     dvao.bind();
+
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, (void*)0);
     
     wind.poll();
     
