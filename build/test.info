@@ -1,0 +1,12 @@
+; This is just copied over from https://github.com/ComfyKernel/Thunder ;
+
+(uint)
+[width]  132
+[height] 132
+
+(list)
+[layer] 'testmap_prop_front.csv'
+[layer] 'testmap_prop_back.csv'
+[layer] 'testmap_collision.csv'
+[layer] 'testmap_logic.csv'
+[layer] 'testmap_path_test.csv'

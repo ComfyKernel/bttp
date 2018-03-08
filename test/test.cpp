@@ -1,4 +1,6 @@
 #include <iostream>
+#include <utility>
+#include <string>
 
 #include <engine.hpp>
 
@@ -57,6 +59,52 @@ int main(int argc, char *argv[]) {
 
   test_type2d();
   test_type3d();
+
+  bt::log<<"\nTesting formatreader\n";
+
+  bt::log<<"Creating the reader\n";
+
+  bt::formatreader fri("test.info");
+  
+  auto fr_i_type = [&](bt::formatreader& fr,
+		       const std::string& data) -> void {
+    bt::log<<"Adding type : "<<data<<"\n";
+    
+    if(data == "list") {
+      bt::log<<"Setting the 'isList' flag\n";
+      fr.setFlag("isList", true);
+    } else {
+      fr.setFlag("isList", false);
+    }
+    
+    fr.pushInfo("type", data);
+  };
+
+  auto fr_i_name = [&](bt::formatreader& fr,
+		       const std::string& data) -> void {
+    void* _value;
+
+    bt::log<<"Pushing data : "<<data<<" : of type : "<<fr.getInfo("type")<<"\n";
+
+    const std::string& type = fr.getInfo("type");
+    
+    if(type == "uint") {
+      _value = new uint(std::stoul(fr.nextString()));
+    } else if(type =="int") {
+      _value = new int(std::stol(fr.nextString()));
+    } else {
+      _value = NULL;
+    }
+
+    fr.pushData(data, _value);
+  };
+
+  bt::log<<"Adding new rules\n";
+  
+  fri.newRule("+(+)", fr_i_type);
+  fri.newRule("+[+]", fr_i_name);
+
+  fri.read();
 
   bt::log<<"\nTesting window creation / Deletion\n";
 
