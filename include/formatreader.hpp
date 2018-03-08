@@ -32,7 +32,7 @@ namespace bt {
     bool is_open();
     bool open(const std::string&);
 
-    void newRule(const std::string&, explicit __bt_format_function);
+    void newRule(const std::string&, __bt_format_function);
     
     bool read();
 
