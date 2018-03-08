@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+#include <functional>
 
 namespace bt {
   class argumentreader {
@@ -13,7 +14,7 @@ namespace bt {
     argumentreader();
     argumentreader(int, char**);
 
-    
+    bool addCommand(const std::string& name, const std::string& description, std::function<void (int, const char*)> callback);
   };
 };
 
