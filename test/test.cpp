@@ -101,8 +101,12 @@ int main(int argc, char *argv[]) {
 
   bt::log<<"Adding new rules\n";
   
-  fri.newRule("+(+)", fr_i_type);
-  fri.newRule("+[+]", fr_i_name);
+  fri.newRule("*(*)", fr_i_type);
+  fri.newRule("*[*]", fr_i_name);
+
+  fri.splitInfo="])\n";
+  
+  bt::log<<"Reading\n";
 
   fri.read();
 

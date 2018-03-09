@@ -22,6 +22,8 @@ namespace bt {
     std::vector<std::pair<std::string, bool>>        _flags;
     std::vector<std::pair<std::string, std::string>> _info;
     std::vector<std::pair<std::string, void*>>       _data;
+    std::vector<std::string> _segments;
+    unsigned int             _sptr = 0;
 
     std::fstream _fi;
     
@@ -33,7 +35,9 @@ namespace bt {
     bool open(const std::string&);
 
     void newRule(const std::string&, __bt_format_function);
-    
+
+    std::string splitInfo="";
+    const std::string& nextString();
     bool read();
 
     void setFlag(const std::string&, bool);
